@@ -2,8 +2,7 @@
 ## PROBLEMA 1
 
 ### Punto 1
-Per una guida d'onda in silicio di tipo slab avente l'indice di rifrazione del core pari a $3.48$ e l'indice di rifrazione del cladding pari a $1.44$, è stato riportato sul grafico sottostante l'indice di rifrazione efficace $n_{eff}$ in funzione dello spessore $d$ del core per il modo fondamentale $TE$ a $1.55\,\mu m$. I risultati, ottenuti applicando la condizione di continuita del campo magnetico lungo l'asse z per la soluzione dell'equazione d'onda, mostrano i soli primi tre modi $TE$ della guida. I modi con indice superiore al secondo hanno un andamento molto simile a quelli visualizzati nel grafico, ovvero tenderebbero anch'essi a $n_{core}$ per lo spessore del core che tende ad infinito, ma avrebbero l'intersezione con l'asse delle ascisse a valori sempre maggiori di $d$. Osservando il grafico è possibile valutare quale sia lo spessore più opportuno per il core in base alle nostre specifiche di progetto. In particolare prenendo uno spessore minore di circa $0.25 \,\mu m$ la guida è monomodale, ovvero presenta solo il modo $TE_0$. Prendendo invece uno spessore compreso tra circa $0.25 \,\mu m$ e $0.5 \,\mu m$ la guida è multimodale, ovvero presenta anche il modo $TE_1$ oltre al modo $TE_0$. Tale ragionamento può essere esteso per tutti i modi $TE$ ma è importante notare come al crescere delle dimensioni dello spessore del core scelto, cresce anche il numero di modi che si propagano nella guida. Come suggerito dal nome stesso una guida monomodale supporta un solo modo di propagazione e ciò significa che all'interno della guida è possibile propagare una sola frequenza. Per una guida multimodale, invece, è possibile propagare più modi ovvero sono presenti più onde aventi frequenze diverse. 
-
+Per una guida d'onda in silicio di tipo slab avente l'indice di rifrazione del core pari a $3.48$ e l'indice di rifrazione del cladding pari a $1.44$, è stato riportato sul grafico sottostante l'indice di rifrazione efficace $n_{eff}$ in funzione dello spessore $d$ del core per il modo fondamentale $TE$ a $1.55\,\mu m$. I risultati, ottenuti applicando la condizione di continuita del campo magnetico lungo l'asse z per la soluzione dell'equazione d'onda, mostrano i soli primi tre modi $TE$ della guida. I modi con indice superiore al secondo hanno un andamento molto simile a quelli visualizzati nel grafico, ovvero tenderebbero anch'essi a $n_{core}$ per lo spessore del core che tende ad infinito, ma avrebbero l'intersezione con l'asse delle ascisse a valori sempre maggiori di $d$. Osservando il grafico è possibile valutare quale sia lo spessore più opportuno per il core in base alle nostre specifiche di progetto. In particolare prenendo uno spessore minore di circa $0.25 \,\mu m$ la guida è monomodale, ovvero presenta solo il modo $TE_0$. Prendendo invece uno spessore compreso tra circa $0.25 \,\mu m$ e $0.5 \,\mu m$ la guida è multimodale, ovvero presenta anche il modo $TE_1$ oltre al modo $TE_0$. Tale ragionamento può essere esteso per tutti i modi $TE$. In generale, maggiore è lo spessore del core scelto e maggiore sarà il numero di modi di propagazione della guida.
 $$
 k_x = k_0\sqrt{n_{core}^2-n_{eff}^2}
 $$
@@ -82,4 +81,28 @@ $$
 ![n_eff(d)](figure/es1/es1_5.jpg)
 
  ### Punto 6
+A partire dal grafico presente al **Punto 3** vado a selezionare uno spessore del core tale per cui il fattore di confinamento $\Gamma_{TE0}$ abbiamo un valore compreso tra il $70\%$ e $80\%$.
+Prendendo al centro del range, scelgo uno spessore del core pari a circa $thickness=4 \,\mu m$.
+
+### Punto 7
+Riutilizzando le equazioni di Maxwell con le condizioni al contorno per la guida d'onda in silicio di modo $TE$ e lo spessore del core selezionato nel $Punto 6$ è stato possibile calcolare la pulsazione in funzione dell'indice di rifrazione efficace. Considerando i soli primi due modi $TE$ le equazioni sono le seguenti:
+$$
+w_{TE0} = \frac{2 \arctg{(\sqrt{\frac{n_{eff}^2 - n_{cludding}^2}{n_{core}^2 - n_{eff}^2}})}}{thickness*\sqrt{n_{core}^2 - n_{eff}^2}}*c
+$$
+$$
+w_{TE1} = \frac{2 \arctg{(\sqrt{\frac{n_{eff}^2 - n_{cludding}^2}{n_{core}^2 - n_{eff}^2}})} + \pi}{thickness*\sqrt{n_{core}^2 - n_{eff}^2}}*c
+$$
+
+Utilizzando infine la relazione $\lambda = \frac{2\pi c}{\omega}$ e sostituendo **omega** con le relazioni appena ricavate, è possibile ricavare la lungheza d'onda in funzione dell'indice di rifrazione efficace. Il tutto è stato poi riportato sui grafici sottostanti in cui è stato espresso l'indice di rifrazione efficace in funzione della pulsazione (grafico di sinistra) e della lunghezza d'onda (grafico di destra).
+Da essi si nota che, per una guida d'onda con le specifiche descitte, se l'onda che si propaga in essa ha una lunghezza d'onda maggiore di circa $1200\,nm$, allora la propagazione sarà monomodale. Al contrario al di sotto di tale lughezza d'onda, la propagazione è multimodale.
+
+![n_eff(d)](figure/es1/es1_7.jpg)
+
+
+----
+  
+## Domande teoriche
+### 1 e 2
+Come suggerito dal nome stesso una guida monomodale supporta un solo modo di propagazione. Ciò significa che la luce può percorrere un unico percorso possibile. Per una guida multimodale, invece, sono possibili più percorsi per la luce per percorrere la guida. Come dimostrato dai risultati ottenuti nel $Problema 1$, le guide monomodali sono caratterizzate da uno spessore del core minore rispetto a quelle multimodali. Inoltre, a parità di spessore del core, la guida è monomodale per lunghezze d'onda elevate dell'onda che si propaga in essa e diventa multimodale man mano che il valore della lunghezza d'onda diminuisce. Guardando il campo elettrico, si nota che esso è magggiormente concentrato al centro del core per le guide monomodali. 
+**Parliamo anche della dispersione?**
 
