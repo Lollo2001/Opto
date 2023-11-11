@@ -1,8 +1,8 @@
 # TITOLO
 ## PROBLEMA 1
-
+Nella trattazione seguente è stata esaminata una guida d'onda in silicio di tipo slab infinitivamente lunga in tutte le dimensioni dello spazio. La direzione di propagazione dell'onda avviene lungo l'asse z e la discontinuità di materiale avviene lungo l'asse x. Essa è caratterizzata da un indice di rifrazione del core pari a $3.48$ e l'indice di rifrazione del cladding pari a $1.44$.
 ### Punto 1
-Per una guida d'onda in silicio di tipo slab avente l'indice di rifrazione del core pari a $3.48$ e l'indice di rifrazione del cladding pari a $1.44$, è stato riportato sul grafico sottostante l'indice di rifrazione efficace $n_{eff}$ in funzione dello spessore $d$ del core per il modo fondamentale $TE$ a $1.55\,\mu m$. I risultati, ottenuti applicando la condizione di continuita del campo magnetico lungo l'asse z per la soluzione dell'equazione d'onda, mostrano i soli primi tre modi $TE$ della guida. I modi con indice superiore al secondo hanno un andamento molto simile a quelli visualizzati nel grafico, ovvero tenderebbero anch'essi a $n_{core}$ per lo spessore del core che tende ad infinito, ma avrebbero l'intersezione con l'asse delle ascisse a valori sempre maggiori di $d$. Osservando il grafico è possibile valutare quale sia lo spessore più opportuno per il core in base alle nostre specifiche di progetto. In particolare prenendo uno spessore minore di circa $0.25 \,\mu m$ la guida è monomodale, ovvero presenta solo il modo $TE_0$. Prendendo invece uno spessore compreso tra circa $0.25 \,\mu m$ e $0.5 \,\mu m$ la guida è multimodale, ovvero presenta anche il modo $TE_1$ oltre al modo $TE_0$. Tale ragionamento può essere esteso per tutti i modi $TE$. In generale, maggiore è lo spessore del core scelto e maggiore sarà il numero di modi di propagazione della guida.
+Sul grafico sottostante è stato riportato l'indice di rifrazione efficace $n_{eff}$ in funzione dello spessore $d$ del core per il modo fondamentale $TE$ a $1.55\,\mu m$. I risultati, ottenuti applicando la condizione di continuita del campo magnetico lungo l'asse z per la soluzione dell'equazione d'onda, mostrano i soli primi tre modi $TE$ della guida. I modi con indice superiore al secondo hanno un andamento molto simile a quelli visualizzati nel grafico, ovvero tenderebbero anch'essi a $n_{core}$ per lo spessore del core che tende ad infinito, ma avrebbero l'intersezione con l'asse delle ascisse a valori sempre maggiori di $d$. Osservando il grafico è possibile valutare quale sia lo spessore più opportuno per il core in base alle nostre specifiche di progetto. In particolare prenendo uno spessore minore di circa $0.25 \,\mu m$ la guida è monomodale, ovvero presenta solo il modo $TE_0$. Prendendo invece uno spessore compreso tra circa $0.25 \,\mu m$ e $0.5 \,\mu m$ la guida è multimodale, ovvero presenta anche il modo $TE_1$ oltre al modo $TE_0$. Tale ragionamento può essere esteso per tutti i modi $TE$. In generale, maggiore è lo spessore del core scelto e maggiore sarà il numero di modi di propagazione della guida.
 $$
 k_x = k_0\sqrt{n_{core}^2-n_{eff}^2}
 $$
@@ -22,7 +22,7 @@ $$
 ![n_eff(d)](figure/es1/es1_1.jpg)
 
 ### Punto 2
-Per fare in modo che la guida d'onda in silicio specificata nel punto 1 abbiamo i soli modi $TE_0$ e $TE_1$, è necessario scegliere uno spessore del core compreso tra circa $0.25 \,\mu m$ e $0.5 \,\mu m$. Tutte le analisi seguenti sono condotte considerando uno slab avente lo spessore del core pari a $0.45 \,\mu m$. La scelta non è stata casuale in quanto l'intenzione era quella di avere una guida d'onda in cui il campo fosse il più confinato possibile dentro al core ($\Gamma$ più vicina possibile a $1$ come verrà descritto nel Punto 3) senza però avere anche il modo $TE_2$ nella guida.
+Per fare in modo che la guida d'onda in silicio descritta abbiamo i soli modi $TE_0$ e $TE_1$, è necessario scegliere uno spessore del core compreso tra circa $0.25 \,\mu m$ e $0.5 \,\mu m$. Tutte le analisi seguenti sono condotte considerando uno slab avente lo spessore del core pari a $0.45 \,\mu m$. La scelta non è stata casuale in quanto l'intenzione era quella di avere una guida d'onda in cui il campo fosse il più confinato possibile dentro al core ($\Gamma$ più vicina possibile a $1$ come verrà descritto nel Punto 3) senza però avere anche il modo $TE_2$ nella guida.
 Supponendo che la guida sia infinitivamente lunga in tutte le direzioni e supponendo che la discontinuità del materiale sia lungo l'asse x, dire che una guida sia $TE$ significa che essa ha il campo elettrico perpendicolare alla direzione di propagazione  dell'onda ($z$) e che ha componente del campo elettrico solo lungo l'asse $y$. Il campo magnetico, dovendo essere perpendicolare al campo elettrico, ha componente lungo l'asse $x$ e $z$. Nei grafici sottostanti sono state calcolate in maniera analitica le intensità dei campi $E_y$, $H_z$ e $H_x$ sia per il modo  $TE_0$ che per il modo $TE_1$ per mezzo delle equazioni di Maxwell (le linee verticali tratteggiate delimitano la porzione di core lungo l'asse $x$).
 E' utile notare dai grafici che i campi hanno maggior intensità dentro al core della guida e che man mano che ci inoltriamo nel cladding allontanandoci dal core, l'intensità dei campi tende progressivamente a zero.
 $$
@@ -57,13 +57,13 @@ $$
 ### Punto 3
 Nel grafico sottostante è mostrato l'andamento del fattore di confinamento $\Gamma$ al variare dello spessore del core della guida. Esso è definito come il rapporto tra potenza dentro al core e la potenza in tutta la sezione della guida come mostrano dalla formula qui di seguito.
 $$
-\Gamma_{TE} = \frac{P_{core}} {P_{total}} = \frac{\int_{-d}^{0} |\epsilon_y(x)|^2 \,dx} {\int_{-\infin}^{\infin} |\epsilon_y(x)|^2 \,dx}
+\Gamma_{TE} = \frac{P_{core}}{P_{total}} = \frac{\int_{-d}^{0} |\epsilon_y(x)|^2 \, dx}{\int_{-\infty}^{\infty} |\epsilon_y(x)|^2 \, dx}
 $$
 
 ![n_eff(d)](figure/es1/es1_3.jpg)
 
 ### Punto 4
-Assumiamo ora che la guida d'onda in silicio aventi le proprità descritte nel $Punto 1$ abbia il coefficiente di attenuazione del core pari a $\alpha_{Si}=0.3\,cm^-1$ e il coefficiente di attenuazione del cladding pari a $\alpha_{SiO2}=0.15\,cm^-1$. E' possibile dunque calcolare il fattore di attenuazione modale tramite la seguete formula:
+Assumiamo ora che la guida d'onda in silicio aventi le proprità descritte abbia il coefficiente di attenuazione del core pari a $\alpha_{Si}=0.3\,cm^-1$ e il coefficiente di attenuazione del cladding pari a $\alpha_{SiO2}=0.15\,cm^-1$. E' possibile dunque calcolare il fattore di attenuazione modale tramite la seguete formula:
 $$
 \alpha_{modal}=\alpha_{Si}\Gamma_{core} + \alpha_{SiO2}\Gamma_{cladding} \qquad\qquad dove \qquad \Gamma_{cladding}=1-\Gamma_{core}
 $$
@@ -87,10 +87,10 @@ Prendendo al centro del range, scelgo uno spessore del core pari a circa $thickn
 ### Punto 7
 Riutilizzando le equazioni di Maxwell con le condizioni al contorno per la guida d'onda in silicio di modo $TE$ e lo spessore del core selezionato nel $Punto 6$ è stato possibile calcolare la pulsazione in funzione dell'indice di rifrazione efficace. Considerando i soli primi due modi $TE$ le equazioni sono le seguenti:
 $$
-w_{TE0} = \frac{2 \arctg{(\sqrt{\frac{n_{eff}^2 - n_{cludding}^2}{n_{core}^2 - n_{eff}^2}})}}{thickness*\sqrt{n_{core}^2 - n_{eff}^2}}*c
+w_{TE0} = \frac{2 \arctan{(\sqrt{\frac{n_{eff}^2 - n_{cladding}^2}{n_{core}^2 - n_{eff}^2}})}}{thickness*\sqrt{n_{core}^2 - n_{eff}^2}}*c
 $$
 $$
-w_{TE1} = \frac{2 \arctg{(\sqrt{\frac{n_{eff}^2 - n_{cludding}^2}{n_{core}^2 - n_{eff}^2}})} + \pi}{thickness*\sqrt{n_{core}^2 - n_{eff}^2}}*c
+w_{TE1} = \frac{2 \arctan{(\sqrt{\frac{n_{eff}^2 - n_{cladding}^2}{n_{core}^2 - n_{eff}^2}})} + \pi}{thickness*\sqrt{n_{core}^2 - n_{eff}^2}}*c
 $$
 
 Utilizzando infine la relazione $\lambda = \frac{2\pi c}{\omega}$ e sostituendo **omega** con le relazioni appena ricavate, è possibile ricavare la lungheza d'onda in funzione dell'indice di rifrazione efficace. Il tutto è stato poi riportato sui grafici sottostanti in cui è stato espresso l'indice di rifrazione efficace in funzione della pulsazione (grafico di sinistra) e della lunghezza d'onda (grafico di destra).
