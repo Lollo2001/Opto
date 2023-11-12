@@ -71,6 +71,7 @@ grid on
 
 L=[1 10 1000 80000]; % lunghezze [m]
 tau_0=[1e-9 1e-11]; % costanti di tempo [s]
+tau_g=Beta_0_primo.*L;
 alpha_db=0.00023; % attenuazione della fibra [dB/m]
 N=1e3; % fattore di campionamento
 M=70; % fattore per l'ampiezza del segnale
@@ -82,10 +83,10 @@ for k = 1:length(tau_0) % ciclo per gestire ogni costante di tempo
         t=(-t_end:dt:t_end); % vettore tempi [s]
         lung=length(t); % lunghezza vettore tempi
         w=2*pi.*(linspace(-0.5/dt,0.5/dt,lung)); % vettore pulsazioni [rad/s]
-        E_t=(tau_0(k)/sqrt(tau_0(k)^2+abs(Beta_0_secondo)*L(j))).*exp(-(t.^2).*(tau_0(k)^2)./(2*(tau_0(k)^4+(Beta_0_secondo*L(j))^2))).*10^(-alpha_db/20*L(j)); % formula analitica dell'impulso d'uscita
+        E_t=(tau_0(k)/sqrt(tau_0(k)^2+1i*Beta_0_secondo*L(j))).*exp(-(t.^2).*(tau_0(k)^2)./(2*(tau_0(k)^4+(Beta_0_secondo*L(j))^2))).*10^(-alpha_db/20*L(j)); % formula analitica dell'impulso d'uscita
         figure(4+2*(k-1))
         hold on
-        subplot(1,2,1); plot(t*1e9,E_t,'LineWidth',0.5)
+        subplot(1,2,1); plot(t*1e9,abs(E_t),'LineWidth',0.5)
         E_w=fftshift(fft(E_t))/lung; % trasformata di Fourier per trovare lo spettro del segnale d'uscita
         figure(5+2*(k-1))
         hold on
@@ -107,14 +108,16 @@ for k = 1:length(tau_0) % ciclo per gestire ogni costante di tempo
     t=(-t_end:dt:t_end); % vettore tempi [s]
     lung=length(t); % lunghezza vettore tempi
     w=2*pi.*(linspace(-0.5/dt,0.5/dt,lung)); % vettore pulsazioni [rad/s]
+    Beta=Beta_0+Beta_0_primo.*(w-w_0)+Beta_0_secondo.*(w-w_0).^2; % costante di propagazione
     p_t=exp(-(t.^2/(2*tau_0(k)^2)));
     p_w=fftshift(fft(p_t))/lung; 
     for j = 1:length(L) % ciclo per gestire ogni lunghezza
-        E_w=p_w.*exp(-1i*Beta_0_secondo*L(j)).*10^(-alpha_db*L(j)/20); 
+        t_tilde=t+tau_g(j);
+        E_w=p_w.*exp(-1i.*Beta.*L(j)).*10^(-alpha_db*L(j)/20); 
         E_t=ifft(E_w)*lung;
         figure(4+2*(k-1))
         hold on
-        subplot(1,2,2); plot(t*1e9,abs(E_t),'LineWidth',0.5)
+        subplot(1,2,2); plot(t_tilde*1e9,abs(E_t),'LineWidth',0.5)
         figure(5+2*(k-1))
         hold on
         subplot(1,2,2); plot(w,abs(E_w),'LineWidth',0.5)
@@ -129,14 +132,14 @@ end
 
 figure(4)
 subplot(1,2,1)
-xlim([-5 5])
+%xlim([-5 5])
 title('|E_t| con τ_0=1 ns analitica','FontSize',22)
 xlabel('t [ns]','FontSize',16)      % plot dell'impulso d'ingresso con tau_0= 1 ns
 ylabel('|E_t|','FontSize',16)
 legend('L=1 m','L=10 m','L=1 km','L=80 km','input')
 grid on
 subplot(1,2,2)
-xlim([-5 5])
+%xlim([-5 5])
 title('|E_t| con τ_0=1 ns numerica','FontSize',22)
 xlabel('t [ns]','FontSize',16)      % plot dell'impulso d'ingresso con tau_0= 1 ns
 ylabel('|E_t|','FontSize',16)
@@ -144,21 +147,21 @@ grid on
 
 figure(5)
 subplot(1,2,1)
-xlim([-4.1721e+09 4.3279e+09])
+%xlim([-4.1721e+09 4.3279e+09])
 title('|E_ω| con τ_0=1 ns analitica','FontSize',22)
 xlabel('ω [rad/s]','FontSize',16)        % plot dello spettro d'uscita con tau_0= 1 ns
 ylabel('|E_ω|','FontSize',16)
 legend('L=1 m','L=10 m','L=1 km','L=80 km','input')
 grid on
 subplot(1,2,2)
-xlim([-4.1721e+09 4.3279e+09])
+%xlim([-4.1721e+09 4.3279e+09])
 title('|E_ω| con τ_0=1 ns numerica','FontSize',22)
 xlabel('ω [rad/s]','FontSize',16)        % plot dello spettro d'uscita con tau_0= 1 ns
 ylabel('|E_ω|','FontSize',16)
 grid on
 
 figure(6)
-subplot(1,2,1)
+%subplot(1,2,1)
 xlim([-0.5 0.5])
 title('|E_t| con τ_0=10 ps analitica','FontSize',22)
 xlabel('t [ns]','FontSize',16)      % plot dell'impulso d'uscita con tau_0= 10 ps
@@ -166,7 +169,7 @@ ylabel('|E_t|','FontSize',16)
 legend('L=1 m','L=10 m','L=1 km','L=80 km','input')
 grid on
 subplot(1,2,2)
-xlim([-0.5 0.5])
+%xlim([-0.5 0.5])
 title('|E_t| con τ_0=10 ps numerica','FontSize',22)
 xlabel('t [ns]','FontSize',16)      % plot dell'impulso d'uscita con tau_0= 10 ps
 ylabel('|E_t|','FontSize',16)
@@ -174,14 +177,14 @@ grid on
 
 figure(7)
 subplot(1,2,1)
-xlim([-2.7267e+11 2.7733e+11])
+%xlim([-2.7267e+11 2.7733e+11])
 title('|E_ω| con τ_0=10 ps analitica','FontSize',22)
 xlabel('ω [rad/s]','FontSize',16)       % plot dello spettro dell'uscita con tau_0= 10 ps
 ylabel('|E_ω|','FontSize',16)
 legend('L=1 m','L=10 m','L=1 km','L=80 km','input')
 grid on
 subplot(1,2,2)
-xlim([-2.7267e+11 2.7733e+11])
+%xlim([-2.7267e+11 2.7733e+11])
 title('|E_ω| con τ_0=10 ps numerica','FontSize',22)
 xlabel('ω [rad/s]','FontSize',16)       % plot dello spettro dell'uscita con tau_0= 10 ps
 ylabel('|E_ω|','FontSize',16)
@@ -202,7 +205,7 @@ for k = 1:length(tau_0) % ciclo per gestire ogni costante di tempo
         t_end=M*tau_0(k); % limite per il vettore tempi
         dt=tau_0(k)/N; % tempo di campionamento
         t=(-t_end:dt:t_end); % vettore tempi [s]
-        E_t=(tau_0(k)/sqrt(tau_0(k)^2+abs(Beta_0_secondo)*L(k))).*exp(-(t.^2).*(tau_0(k)^2)./(2*(tau_0(k)^4+(Beta_0_secondo*L(j))^2))).*10^(-alpha_dB*L(j)/20); % formula analitica dell'impulso d'uscita
+        E_t=(tau_0(k)/sqrt(tau_0(k)^2+1i*Beta_0_secondo*L(k))).*exp(-(t.^2).*(tau_0(k)^2)./(2*(tau_0(k)^4+(Beta_0_secondo*L(j))^2))).*10^(-alpha_dB*L(j)/20); % formula analitica dell'impulso d'uscita
         half_amp=max(abs(E_t))/2; % mezza ampiezza del segnale 
         E_t_0=abs(E_t(1:(length(E_t)-1)/2)); % metà sinistra della gaussiana
         E_t_1=abs(E_t((length(E_t)-1)/2+1:end)); % metà destra della gaussiana
@@ -230,30 +233,24 @@ grid on
 %% parte 5
 
 tau_0=1e-11; % costante di tempo [s]
-N=1e3; % fattore di campionamento
-M=70; % fattore per l'ampiezza del segnale
-L=[1 10 1000 80000]; % lunghezze [m]
-tau_g=Beta_0_primo.*L; % ritardi di gruppo [s]
-t_end=M*tau_0; % limite per il vettore tempi
-dt=tau_0/N; % tempo di campionamento
-t=(-t_end:dt:t_end); % vettore tempi [s]
+L=[1000 80000]; % lunghezze [m]
+N=1e7;
+t=linspace(0,1e-3,N); % vettore tempi [s]
 
 for j = 1:length(L) % ciclo per gestire ogni lunghezza
-    t_tilde=t+tau_g(j); % vettore tempi con ritardi di gruppo [s]
-    chirp=-(Beta_0_secondo*L(j).*t_tilde)./(tau_0^4+(Beta_0_secondo*L(j))^2); % chirp di frequenza [rad/s]
+    %t_tilde=t+tau_g(j); % vettore tempi con ritardi di gruppo [s]
+    chirp=-(Beta_0_secondo*L(j).*(t-Beta_0_primo*L(j)))./(tau_0^4+(Beta_0_secondo*L(j))^2); % chirp di frequenza [rad/s]
     figure(9)
     hold on
-    plot(t*1e9,chirp,'LineWidth',0.5)
+    plot(t,chirp,'LineWidth',0.5)
 end
 
 
 figure(9)
-yline(w_0,'g--','LineWidth',0.5)
-axis([-t_end*1e9 t_end*1e9 -w_0 max(chirp)+w_0])
 title('Chirp di frequenza con τ_0=10 ps','FontSize',22)
-xlabel('t [ns]','FontSize',16)         % plot del chirp di frequenza
+xlabel('t [s]','FontSize',16)         % plot del chirp di frequenza
 ylabel('φ [rad/s]','FontSize',16)
-legend('L=1 m','L=10 m','L=1 km','L=80 km','ω_0','Location','east')
+legend('L=1 km','L=80 km','Location','east')
 grid on
 
 
