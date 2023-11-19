@@ -24,7 +24,7 @@ for j = 1:length(tau_0) % ciclo per gestire ogni costante di tempo
     hold on  
     plot(t*1e9,p_t,'LineWidth',0.5)
     figure (2)
-    hold on               %% plot ancora molto dubbio
+    hold on
     plot(lambda,abs(P_f),'LineWidth',0.5)
 end
 
