@@ -10,8 +10,8 @@ Py=get(h, 'ydata')
 
 
 
-t0=10.175; % ns
-T_bit=1/2.5; % ns    
+t0=10.04; % ns
+T_bit=1/20; % ns    
 
 figure()
 for i=1:64
